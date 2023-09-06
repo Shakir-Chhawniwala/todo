@@ -5,6 +5,7 @@ const TodoItem: React.FC<{
     type: string;
     onChecked: (id: string) => void;
 }> = (props) => {
+    console.log(props)
     return (
         <div
         onClick={() => {

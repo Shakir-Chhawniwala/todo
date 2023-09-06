@@ -8,7 +8,7 @@ const Todos = () => {
     const [addTodoItem] = useAddTodoItemMutation()
     const [deleteTodoItem] = useDeleteTodoItemMutation()
 
-   
+
     const [inputText, setInputText] = useState<string>("");
 
 
@@ -19,12 +19,13 @@ const Todos = () => {
 
     function addItem() {
         addTodoItem(new Todo(inputText))
+        setInputText("")
     }
 
     function deleteItem(id: string) {
         // deleteTodoItem(id);
     }
-   
+
     return (<>
         <div className="container">
             <div className="heading">
@@ -41,7 +42,7 @@ const Todos = () => {
                     {data?.map((todoItem: { id: string, text: string }, index: string) => (
                         <TodoItem
                             key={index}
-                            id={index}
+                            id={todoItem.id}
                             type={todoItem.text}
                             onChecked={deleteItem}
                         />

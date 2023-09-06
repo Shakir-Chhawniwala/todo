@@ -7,8 +7,10 @@ export type TodoResponse = Todo[]
 export const todoApi = createApi({
   reducerPath: 'todo',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3005' }),
+  tagTypes: ["todoItem"],
   endpoints: (builder) => ({
     fetchTodoItem: builder.query({
+      providesTags: ["todoItem"],
       query: () => {
         return {
           url: "/todos",
@@ -17,6 +19,7 @@ export const todoApi = createApi({
       }
     }),
     addTodoItem: builder.mutation<TodoResponse, Todo>({
+      invalidatesTags: ["todoItem"],
       query: (todo) => {
         return {
           method: "POST",
@@ -30,6 +33,7 @@ export const todoApi = createApi({
     }),
 
     deleteTodoItem: builder.mutation<TodoResponse, Todo>({
+      invalidatesTags: ["todoItem"],
       query: (todo) => {
         return {
           method: 'DELETE',
